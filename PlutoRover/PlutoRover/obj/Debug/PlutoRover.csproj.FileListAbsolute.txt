@@ -1,0 +1,8 @@
+C:\Amruta\Projects\FundApps\PlutoRover\PlutoRover\obj\Debug\PlutoRover.csproj.CoreCompileInputs.cache
+C:\Amruta\Projects\FundApps\PlutoRover\PlutoRover\bin\Debug\PlutoRover.exe.config
+C:\Amruta\Projects\FundApps\PlutoRover\PlutoRover\bin\Debug\PlutoRover.exe
+C:\Amruta\Projects\FundApps\PlutoRover\PlutoRover\bin\Debug\PlutoRover.pdb
+C:\Amruta\Projects\FundApps\PlutoRover\PlutoRover\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
+C:\Amruta\Projects\FundApps\PlutoRover\PlutoRover\obj\Debug\PlutoRover.csproj.CopyComplete
+C:\Amruta\Projects\FundApps\PlutoRover\PlutoRover\obj\Debug\PlutoRover.exe
+C:\Amruta\Projects\FundApps\PlutoRover\PlutoRover\obj\Debug\PlutoRover.pdb
