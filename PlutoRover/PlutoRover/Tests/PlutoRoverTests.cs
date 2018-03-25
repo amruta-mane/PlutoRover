@@ -13,7 +13,7 @@ namespace PlutoRover
         [TestInitialize]
         public void TestSetUp()
         {
-            grid = new Grid(10, 10);
+            grid = new Grid(10, 10); 
             rover = new Rover(grid);
         }
 
@@ -38,8 +38,8 @@ namespace PlutoRover
             rover.currentPosition = new RoverLocation(0, 0, Direction.E);
             rover.MoveRover("F");
 
-            Assert.AreEqual(rover.currentPosition.CurrentX, 1);
-            Assert.AreEqual(rover.currentPosition.CurrentY, 0);
+            Assert.AreEqual(rover.currentPosition.CurrentX, 0);
+            Assert.AreEqual(rover.currentPosition.CurrentY, 1);
             Assert.AreEqual(rover.currentPosition.CurrentDirection, Direction.E);
         }
 
@@ -60,8 +60,8 @@ namespace PlutoRover
             rover.currentPosition = new RoverLocation(1, 1, Direction.W);
             rover.MoveRover("F");
 
-            Assert.AreEqual(rover.currentPosition.CurrentX, 0);
-            Assert.AreEqual(rover.currentPosition.CurrentY, 1);
+            Assert.AreEqual(rover.currentPosition.CurrentX, 1);
+            Assert.AreEqual(rover.currentPosition.CurrentY, 0);
             Assert.AreEqual(rover.currentPosition.CurrentDirection, Direction.W);
         }
 
