@@ -14,6 +14,8 @@ namespace PlutoRover
 
         private LinkedList<Direction> directionsList;
 
+        private List<ObstacleCoOrdinates> obstaclesList = new List<ObstacleCoOrdinates>();
+
         #endregion
 
         #region Properties
@@ -41,10 +43,11 @@ namespace PlutoRover
 
         #region Constructor
 
-        public Grid(int x, int y)
+        public Grid(int x, int y, List<ObstacleCoOrdinates> obstacles)
         {
             this.x = x;
             this.y = y;
+            this.obstaclesList = obstacles;
 
             Direction[] directions = { Direction.N, Direction.E, Direction.S, Direction.W };
             directionsList = new LinkedList<Direction>(directions);
@@ -54,41 +57,81 @@ namespace PlutoRover
 
         #region Grid Move Methods
 
-        public void MoveForward(RoverLocation location)
+        public bool MoveForward(RoverLocation location, out ObstacleCoOrdinates obstacle)
         {
+            RoverLocation newLocation = new RoverLocation(location.CurrentX, location.CurrentY, location.CurrentDirection);
+            obstacle = new ObstacleCoOrdinates();
+
             switch (location.CurrentDirection)
             {
                 case Direction.N:
-                    location.CurrentX = IncrementX(location.CurrentX);
+                    newLocation.CurrentX = IncrementX(location.CurrentX);
                     break;
                 case Direction.S:
-                    location.CurrentX = DecrementX(location.CurrentX);
+                    newLocation.CurrentX = DecrementX(location.CurrentX);
                     break;
                 case Direction.E:
-                    location.CurrentY = IncrementY(location.CurrentY);
+                    newLocation.CurrentY = IncrementY(location.CurrentY);
                     break;
                 case Direction.W:
-                    location.CurrentY = DecrementY(location.CurrentY);
+                    newLocation.CurrentY = DecrementY(location.CurrentY);
                     break;
+            }
+
+            bool obstacleAtNewLocation = CheckIfObstacleAtLocation(newLocation.CurrentX, newLocation.CurrentY);
+
+            if (obstacleAtNewLocation)
+            {
+                obstacle.XCoOrdinate = newLocation.CurrentX;
+                obstacle.YCoOrdinate = newLocation.CurrentY;
+                return true;
+            }
+            else
+            {
+                location.CurrentX = newLocation.CurrentX;
+                location.CurrentY = newLocation.CurrentY;
+                location.CurrentDirection = newLocation.CurrentDirection;
+
+                return false;
             }
         }
 
-        public void MoveBackward(RoverLocation location)
+        public bool MoveBackward(RoverLocation location, out ObstacleCoOrdinates obstacle)
         {
+            RoverLocation newLocation = new RoverLocation(location.CurrentX, location.CurrentY, location.CurrentDirection);
+            obstacle = new ObstacleCoOrdinates();
+
             switch (location.CurrentDirection)
             {
                 case Direction.N:
-                    location.CurrentX = DecrementX(location.CurrentX);
+                    newLocation.CurrentX = DecrementX(location.CurrentX);
                     break;
                 case Direction.S:
-                    location.CurrentX = IncrementX(location.CurrentX);
+                    newLocation.CurrentX = IncrementX(location.CurrentX);
                     break;
                 case Direction.E:
-                    location.CurrentY = DecrementY(location.CurrentY);
+                    newLocation.CurrentY = DecrementY(location.CurrentY);
                     break;
                 case Direction.W:
-                    location.CurrentY = IncrementY(location.CurrentY);
+                    newLocation.CurrentY = IncrementY(location.CurrentY);
                     break;
+            }
+
+            bool obstacleAtNewLocation = CheckIfObstacleAtLocation(newLocation.CurrentX, newLocation.CurrentY);
+
+            if(obstacleAtNewLocation)
+            {
+                obstacle.XCoOrdinate = newLocation.CurrentX;
+                obstacle.YCoOrdinate = newLocation.CurrentY;
+                return true;
+            }
+            else
+            {
+                obstacle = new ObstacleCoOrdinates();
+                location.CurrentX = newLocation.CurrentX;
+                location.CurrentY = newLocation.CurrentY;
+                location.CurrentDirection = newLocation.CurrentDirection;
+                return false;
             }
         }
 
@@ -170,6 +213,16 @@ namespace PlutoRover
             }
 
             return y;
+        }
+
+        private bool CheckIfObstacleAtLocation(int x, int y)
+        {
+            if (obstaclesList.Any(o => o.XCoOrdinate == x && o.YCoOrdinate == y))
+            {
+                return true;
+            }
+
+            return false;
         }
 
         #endregion

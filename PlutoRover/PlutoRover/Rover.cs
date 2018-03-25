@@ -16,17 +16,20 @@ namespace PlutoRover
             this.grid = grid;
         }
 
-        public RoverLocation MoveRover(string moveCommand)
+        public RoverLocation MoveRover(string moveCommand, out ObstacleCoOrdinates obstacleCoOrdinates)
         {
+            bool obstacleHit = false;
+            obstacleCoOrdinates = new ObstacleCoOrdinates();
+
             foreach (char move in moveCommand)
             {
                 switch (move)
                 {
                     case 'F':
-                        grid.MoveForward(currentPosition);
+                        obstacleHit = grid.MoveForward(currentPosition, out obstacleCoOrdinates);
                         break;
                     case 'B':
-                        grid.MoveBackward(currentPosition);
+                        obstacleHit = grid.MoveBackward(currentPosition, out obstacleCoOrdinates);
                         break;
                     case 'R':
                         grid.MoveRight(currentPosition);
@@ -37,6 +40,11 @@ namespace PlutoRover
                     default:
                         Console.WriteLine($"Move '{move}' is not a valid move.");
                         break;
+                }
+
+                if(obstacleHit)
+                {
+                    break;
                 }
             }
 
