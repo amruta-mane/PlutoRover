@@ -27,8 +27,8 @@ namespace PlutoRover
             rover.currentPosition = new RoverLocation(0, 0, Direction.N);
             rover.MoveRover("F");
 
-            Assert.AreEqual(rover.currentPosition.CurrentX, 0);
-            Assert.AreEqual(rover.currentPosition.CurrentY, 1);
+            Assert.AreEqual(rover.currentPosition.CurrentX, 1);
+            Assert.AreEqual(rover.currentPosition.CurrentY, 0);
             Assert.AreEqual(rover.currentPosition.CurrentDirection, Direction.N);
         }
 
@@ -212,3 +212,4 @@ namespace PlutoRover
         #endregion
     }
 }
+ 
