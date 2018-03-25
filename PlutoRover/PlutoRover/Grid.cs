@@ -1,4 +1,5 @@
-﻿using System;
+﻿using System.Collections.Generic;
+using System.Linq;
 /// <summary>
 /// Class for grid tracking and any movements
 /// </summary>
@@ -10,6 +11,8 @@ namespace PlutoRover
 
         private int x;
         private int y;
+
+        private LinkedList<Direction> directionsList;
 
         #endregion
 
@@ -42,6 +45,9 @@ namespace PlutoRover
         {
             this.x = x;
             this.y = y;
+
+            Direction[] directions = { Direction.N, Direction.E, Direction.S, Direction.W };
+            directionsList = new LinkedList<Direction>(directions);
         }
 
         #endregion
@@ -50,22 +56,70 @@ namespace PlutoRover
 
         public void MoveForward(RoverLocation location)
         {
-
+            switch (location.CurrentDirection)
+            {
+                case Direction.N:
+                    location.CurrentX++;
+                    break;
+                case Direction.S:
+                    location.CurrentX--;
+                    break;
+                case Direction.E:
+                    location.CurrentY++;
+                    break;
+                case Direction.W:
+                    location.CurrentY--;
+                    break;
+            }
         }
 
         public void MoveBackward(RoverLocation location)
         {
-
+            switch (location.CurrentDirection)
+            {
+                case Direction.N:
+                    location.CurrentX--;
+                    break;
+                case Direction.S:
+                    location.CurrentX++;
+                    break;
+                case Direction.E:
+                    location.CurrentY--;
+                    break;
+                case Direction.W:
+                    location.CurrentY++;
+                    break;
+            }
         }
 
         public void MoveRight(RoverLocation location)
         {
+            LinkedListNode<Direction> node = directionsList.Find(location.CurrentDirection);
 
+            // If last node go to first node 
+            if (directionsList.Last() == node.Value)
+            {
+                location.CurrentDirection = directionsList.First.Value;
+            }
+            else
+            {
+                location.CurrentDirection = node.Next.Value;
+            }
         }
 
         public void MoveLeft(RoverLocation location)
         {
+            LinkedListNode<Direction> node = directionsList.Find(location.CurrentDirection);
 
+            // If first node go to last node
+            if (directionsList.First() == node.Value)
+            {
+                location.CurrentDirection = directionsList.Last.Value;
+            }
+            else
+            {
+                location.CurrentDirection = node.Previous.Value;
+            }
         }
 
         #endregion
