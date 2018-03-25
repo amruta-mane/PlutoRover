@@ -210,6 +210,98 @@ namespace PlutoRover
         }
 
         #endregion
+
+        #region Boundary Detection Test Cases
+
+        [TestMethod]
+        public void PlutoGridHitMaxXBoundaryDirectionNorth()
+        {
+            rover.currentPosition = new RoverLocation(10, 0, Direction.N);
+            rover.MoveRover("F");
+
+            Assert.AreEqual(rover.currentPosition.CurrentX, 0);
+            Assert.AreEqual(rover.currentPosition.CurrentY, 0);
+            Assert.AreEqual(rover.currentPosition.CurrentDirection, Direction.N);
+        }
+
+        [TestMethod]
+        public void PlutoGridHitMinXBoundaryDirectionNorth()
+        {
+            rover.currentPosition = new RoverLocation(0, 0, Direction.N);
+            rover.MoveRover("B");
+
+            Assert.AreEqual(rover.currentPosition.CurrentX, 10);
+            Assert.AreEqual(rover.currentPosition.CurrentY, 0);
+            Assert.AreEqual(rover.currentPosition.CurrentDirection, Direction.N);
+        }
+
+        [TestMethod]
+        public void PlutoGridHitMinXBoundaryDirectionSouth()
+        {
+            rover.currentPosition = new RoverLocation(0, 0, Direction.S);
+            rover.MoveRover("F");
+
+            Assert.AreEqual(rover.currentPosition.CurrentX, 10);
+            Assert.AreEqual(rover.currentPosition.CurrentY, 0);
+            Assert.AreEqual(rover.currentPosition.CurrentDirection, Direction.S);
+        }
+
+        [TestMethod]
+        public void PlutoGridHitMaxXBoundaryDirectionSouth()
+        {
+            rover.currentPosition = new RoverLocation(10, 0, Direction.S);
+            rover.MoveRover("B");
+
+            Assert.AreEqual(rover.currentPosition.CurrentX, 0);
+            Assert.AreEqual(rover.currentPosition.CurrentY, 0);
+            Assert.AreEqual(rover.currentPosition.CurrentDirection, Direction.S);
+        }
+
+        [TestMethod]
+        public void PlutoGridHitMaxYBoundaryDirectionEast()
+        {
+            rover.currentPosition = new RoverLocation(0, 10, Direction.E);
+            rover.MoveRover("F");
+
+            Assert.AreEqual(rover.currentPosition.CurrentX, 0);
+            Assert.AreEqual(rover.currentPosition.CurrentY, 0);
+            Assert.AreEqual(rover.currentPosition.CurrentDirection, Direction.E);
+        }
+
+        [TestMethod]
+        public void PlutoGridHitMinYBoundaryDirectionEast()
+        {
+            rover.currentPosition = new RoverLocation(0, 0, Direction.E);
+            rover.MoveRover("B");
+
+            Assert.AreEqual(rover.currentPosition.CurrentX, 0);
+            Assert.AreEqual(rover.currentPosition.CurrentY, 10);
+            Assert.AreEqual(rover.currentPosition.CurrentDirection, Direction.E);
+        }
+
+        [TestMethod]
+        public void PlutoGridHitMaxYBoundaryDirectionWest()
+        {
+            rover.currentPosition = new RoverLocation(0, 10, Direction.W);
+            rover.MoveRover("B");
+
+            Assert.AreEqual(rover.currentPosition.CurrentX, 0);
+            Assert.AreEqual(rover.currentPosition.CurrentY, 0);
+            Assert.AreEqual(rover.currentPosition.CurrentDirection, Direction.W);
+        }
+
+        [TestMethod]
+        public void PlutoGridHitMinYBoundaryDirectionWest()
+        {
+            rover.currentPosition = new RoverLocation(0, 0, Direction.W);
+            rover.MoveRover("F");
+
+            Assert.AreEqual(rover.currentPosition.CurrentX, 0);
+            Assert.AreEqual(rover.currentPosition.CurrentY, 10);
+            Assert.AreEqual(rover.currentPosition.CurrentDirection, Direction.W);
+        }
+
+        #endregion
     }
 }
  
