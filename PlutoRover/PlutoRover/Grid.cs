@@ -59,16 +59,16 @@ namespace PlutoRover
             switch (location.CurrentDirection)
             {
                 case Direction.N:
-                    location.CurrentX++;
+                    location.CurrentX = IncrementX(location.CurrentX);
                     break;
                 case Direction.S:
-                    location.CurrentX--;
+                    location.CurrentX = DecrementX(location.CurrentX);
                     break;
                 case Direction.E:
-                    location.CurrentY++;
+                    location.CurrentY = IncrementY(location.CurrentY);
                     break;
                 case Direction.W:
-                    location.CurrentY--;
+                    location.CurrentY = DecrementY(location.CurrentY);
                     break;
             }
         }
@@ -78,16 +78,16 @@ namespace PlutoRover
             switch (location.CurrentDirection)
             {
                 case Direction.N:
-                    location.CurrentX--;
+                    location.CurrentX = DecrementX(location.CurrentX);
                     break;
                 case Direction.S:
-                    location.CurrentX++;
+                    location.CurrentX = IncrementX(location.CurrentX);
                     break;
                 case Direction.E:
-                    location.CurrentY--;
+                    location.CurrentY = DecrementY(location.CurrentY);
                     break;
                 case Direction.W:
-                    location.CurrentY++;
+                    location.CurrentY = IncrementY(location.CurrentY);
                     break;
             }
         }
@@ -120,6 +120,56 @@ namespace PlutoRover
             {
                 location.CurrentDirection = node.Previous.Value;
             }
+        }
+
+        #endregion
+
+        #region private methods
+        private int IncrementX(int x)
+        {
+            x++;
+
+            if(x > MaxXCoOrdinate)
+            {
+                x = 0;
+            }
+
+            return x;
+        }
+
+        private int DecrementX(int x)
+        {
+            x--;
+            if(x < 0)
+            {
+                x = MaxXCoOrdinate;
+            }
+
+            return x;
+        }
+
+        private int IncrementY(int y)
+        {
+            y++;
+
+            if(y > MaxYCoOrdinate)
+            {
+                y = 0;
+            }
+
+            return y;
+        }
+
+        private int DecrementY(int y)
+        {
+            y--;
+
+            if(y < 0)
+            {
+                y = MaxYCoOrdinate;
+            }
+
+            return y;
         }
 
         #endregion
