@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PlutoRover
 {
@@ -41,8 +37,8 @@ namespace PlutoRover
                         Console.WriteLine($"Move '{move}' is not a valid move.");
                         break;
                 }
-
-                if(obstacleHit)
+                
+                if (obstacleHit)
                 {
                     break;
                 }

@@ -13,6 +13,8 @@ namespace PlutoRover
         private int y;
 
         private LinkedList<Direction> directionsList;
+        private LinkedList<int> xAxis = new LinkedList<int>();
+        private LinkedList<int> yAxis= new LinkedList<int>();
 
         private List<ObstacleCoOrdinates> obstaclesList = new List<ObstacleCoOrdinates>();
 
@@ -51,6 +53,9 @@ namespace PlutoRover
 
             Direction[] directions = { Direction.N, Direction.E, Direction.S, Direction.W };
             directionsList = new LinkedList<Direction>(directions);
+
+            InitializeAxis(x, ref xAxis);
+            InitializeAxis(y, ref yAxis);            
         }
 
         #endregion
@@ -170,11 +175,16 @@ namespace PlutoRover
         #region private methods
         private int IncrementX(int x)
         {
-            x++;
+            LinkedListNode<int> node = xAxis.Find(x);
 
-            if(x > MaxXCoOrdinate)
+            // If last node go to first 
+            if (xAxis.Last() == node.Value)
             {
-                x = 0;
+                x = xAxis.First.Value;
+            }
+            else
+            {
+                x = node.Next.Value;
             }
 
             return x;
@@ -182,10 +192,16 @@ namespace PlutoRover
 
         private int DecrementX(int x)
         {
-            x--;
-            if(x < 0)
+            LinkedListNode<int> node = xAxis.Find(x);
+
+            // If first node go to last
+            if (xAxis.First() == node.Value)
             {
-                x = MaxXCoOrdinate;
+                x = xAxis.Last.Value;
+            }
+            else
+            {
+                x = node.Previous.Value;
             }
 
             return x;
@@ -193,11 +209,16 @@ namespace PlutoRover
 
         private int IncrementY(int y)
         {
-            y++;
+            LinkedListNode<int> node = yAxis.Find(y);
 
-            if(y > MaxYCoOrdinate)
+            // If last node go to first 
+            if (yAxis.Last() == node.Value)
             {
-                y = 0;
+                y = yAxis.First.Value;
+            }
+            else
+            {
+                y = node.Next.Value;
             }
 
             return y;
@@ -205,11 +226,16 @@ namespace PlutoRover
 
         private int DecrementY(int y)
         {
-            y--;
+            LinkedListNode<int> node = yAxis.Find(y);
 
-            if(y < 0)
+            // If first node go to last 
+            if (yAxis.First() == node.Value)
             {
-                y = MaxYCoOrdinate;
+                y = yAxis.Last.Value;
+            }
+            else
+            {
+                y = node.Previous.Value;
             }
 
             return y;
@@ -223,6 +249,17 @@ namespace PlutoRover
             }
 
             return false;
+        }
+
+        private void InitializeAxis(int length, ref LinkedList<int> axis)
+        {
+            List<int> axisList = new List<int>();
+            for (int i = 0; i <= x; i++)
+            {
+                axisList.Add(i);
+            }
+
+            axis = new LinkedList<int>(axisList);
         }
 
         #endregion
