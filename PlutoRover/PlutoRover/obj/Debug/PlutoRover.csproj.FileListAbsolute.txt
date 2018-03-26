@@ -6,3 +6,4 @@ C:\Amruta\Projects\FundApps\PlutoRover\PlutoRover\bin\Debug\Microsoft.VisualStud
 C:\Amruta\Projects\FundApps\PlutoRover\PlutoRover\obj\Debug\PlutoRover.csproj.CopyComplete
 C:\Amruta\Projects\FundApps\PlutoRover\PlutoRover\obj\Debug\PlutoRover.exe
 C:\Amruta\Projects\FundApps\PlutoRover\PlutoRover\obj\Debug\PlutoRover.pdb
+C:\Amruta\Projects\FundApps\PlutoRover\PlutoRover\obj\Debug\PlutoRover.csprojResolveAssemblyReference.cache
